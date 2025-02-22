@@ -12,8 +12,8 @@ const CandidateSearch = () => {
   }, []);
 
   const fetchNextCandidate = async () => {
-    if (candidates.lenght === 0) {
-      const response: Candidate[] = await searchGithubUser();
+    if (candidates.length === 0) {
+      const response: Candidate[] = await searchGithubUser('someUsername');
       setCandidates(response);
   }
 
@@ -62,3 +62,5 @@ return (
 
 
 export default CandidateSearch;
+const [candidate, setCandidate] = useState<Candidate | null>(null);
+
