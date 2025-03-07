@@ -61,6 +61,45 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+.accept-button,
+.reject-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 10px; /* Adds space between the buttons */
+  transition: background-color 0.3s;
+}
+
+/* Green circle for accept button */
+.accept-button {
+  background-color: #28a745;
+}
+
+.accept-button:hover {
+  background-color: #218838;
+}
+
+/* Red circle for reject button */
+.reject-button {
+  background-color: #dc3545;
+}
+
+.reject-button:hover {
+  background-color: #c82333;
+}
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;  /*Spacing between the buttons*/
+}
 
 @media (prefers-color-scheme: light) {
   :root {

@@ -12,26 +12,55 @@ const SavedCandidates = () => {
     }
   }, []);
 
+  const handleRejectCandidate = (id: number) => {
+    const updatedCandidates = SavedCandidates.filter(
+      (candidate) => candidate.id !== id
+    );
+    setSavedCandidates(updatedCandidates);
+    localStorage.setItem("savedCandidates", JSON.stringify(updatedCandidates));
+  };
   return (
     <div>
       <h1>Potential Candidates</h1>
       {SavedCandidates.length > 0 ? (
-        <ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Location</th>
+              <th>Email</th>
+              <th>Company</th>
+              <th>Bio</th>
+              <th>GitHub Profile</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>        
           {SavedCandidates.map((candidate) => (
-            <li key={`{candidate.id}-${candidate.login}`} style={{ border: '1px solid #ddd', padding: '10px', margin: '10px 0' }}>
-            <img src={candidate.avatar_url} alt={candidate.name} width="50" />
-            <h2>{candidate.name}</h2>
-            <p>Username: {candidate.login}</p>
-            <p>Location: {candidate.location || 'Unknown'}</p>
-            <p>Email: {candidate.email || 'Not available'}</p>
-            <p>Company: {candidate.company || 'Not available'}</p>
-            <p>Bio: {candidate.bio || 'Not available'}</p>
-            <a href={candidate.html_url} target="_blank" rel="noopener noreferrer">
-              GitHub Profile
-            </a>
-          </li>
+            <tr key={`{candidate.id}-${candidate.login}`}>
+            <td>
+              <img src={candidate.avatar_url} alt={candidate.name} width="50" />
+            </td>
+            <td>Name:{candidate.name || candidate.login}</td> {/* Fallback to login if name is missing */}
+            <td>Username: {candidate.login}</td>            
+            <td>Location: {candidate.location || 'Unknown'}</td>
+            <td>Email: {candidate.email || 'Not available'}</td>
+            <td>Company: {candidate.company || 'Not available'}</td>
+            <td>Bio: {candidate.bio || 'Not available'}</td>
+            <td>
+              <a href={candidate.html_url} target="_blank" rel="noopener noreferrer">
+                GitHub Profile
+              </a>
+            </td>
+            <td>
+              <button className="reject-button" onClick={() => handleRejectCandidate(candidate.id)}>-</button>
+            </td>
+          </tr>
         ))}
-      </ul>
+      </tbody>
+    </table>         
     ) : (
       <p>No candidates have been accepted.</p>
     )}

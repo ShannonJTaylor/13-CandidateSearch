@@ -87,8 +87,8 @@ return (
             GitHub Profile
           </a>
           <br />
-          <button onClick={handleAcceptCandidate}>+</button>
-          <button onClick={handleRejectCandidate}>-</button>
+          <button onClick={handleAcceptCandidate} className="accept-button">+</button>
+          <button onClick={handleRejectCandidate} className="reject-button">-</button>
         </div>
       ) : (
         <p>No more candidates available.</p>
