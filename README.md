@@ -27,8 +27,9 @@ The **Candidate Search Application** retrieves GitHub user data via the GitHub A
 
 ## 🖼️ Screenshots
 
-![Candidate Search Screenshot](./screenshots/candidate-search.png)  
-*Example of the Candidate Search page.*
+![Candidate Search Screenshot](./src/assets/screenshots/CandidateSearchScreenshot.png)  
+
+![Potential Candidates Screenshot](./src/assets/screenshots/PotentialCandidatesScreenshot.png)
 
 ## 🌍 Deployed Applicatoin
 
@@ -40,7 +41,7 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository**  
    ```bash
-   git clone http://github.com/ShannonJTaylor/13-CandidateSearch
+   git clone https://github.com/ShannonJTaylor/13-CandidateSearch
    cd 13-CANDIDATESEARCH
    ```
 2. **Install Dependencies**
@@ -86,10 +87,12 @@ ESLint (8.57.0) - Code linting and formatting
   "eslint-plugin-react-refresh": "^0.4.6",
   "typescript": "^5.2.2",
   "vite": "^5.2.0"
-
-##License
+  
+## License
 
 [![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+---
 
 Built with ❤️ by [ShannonJTaylor](https://github.com/ShannonJTaylor)
 
