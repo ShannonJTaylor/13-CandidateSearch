@@ -5,4 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   //envDir: './env',
   plugins: [react()],
+  preview: {
+    allowedHosts: ['one3-candidatesearch-fgn2.onrender.com'],
+  }
 });
