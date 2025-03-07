@@ -27,8 +27,7 @@ const SavedCandidates = () => {
           <thead>
             <tr>
               <th>Avatar</th>
-              <th>Name</th>
-              <th>Username</th>
+              <th>Name</th>              
               <th>Location</th>
               <th>Email</th>
               <th>Company</th>
@@ -43,8 +42,7 @@ const SavedCandidates = () => {
             <td>
               <img src={candidate.avatar_url} alt={candidate.name} width="50" />
             </td>
-            <td>Name:{candidate.name || candidate.login}</td> {/* Fallback to login if name is missing */}
-            <td>Username: {candidate.login}</td>            
+            <td>Name:{candidate.name || candidate.login}</td> {/* Fallback to login if name is missing */}                    
             <td>Location: {candidate.location || 'Unknown'}</td>
             <td>Email: {candidate.email || 'Not available'}</td>
             <td>Company: {candidate.company || 'Not available'}</td>

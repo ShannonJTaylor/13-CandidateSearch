@@ -4,22 +4,22 @@ import { Candidate } from '../interfaces/Candidate.interface';
 
 const CandidateSearch = () => {  
   const [candidate, setCandidate] = useState<Candidate | null>(null);
-  const [candidates, setCandidates] = useState<Candidate[]>([]);  
-  const [savedCandidates, setSavedCandidtates] = useState<Candidate[]>([]);
-
+  const [candidates, setCandidates] = useState<Candidate[]>([]);   
+  
   useEffect(() => {
     fetchNextCandidate();
   }, []);
+  
 
   const fetchNextCandidate = async () => {
     if (candidates.length === 0) {
       const response: Candidate[] = await searchGithub();
-      console.log("Fetched Candidates:", response); // ✅ Debugging
+      console.log("Fetched Candidates:", response); // Debugging
       
       setCandidates(response);
       fetchDetailedCandidate(response[0]);  //Fetch detailed data    
   } else {
-    const [next, ...remaining] = candidates; // ✅ Extract first candidate
+    const [next, ...remaining] = candidates; // Extract first candidate
     setCandidates(remaining);
     fetchDetailedCandidate(next); //Fetch detailed data 
   }
@@ -39,7 +39,7 @@ const fetchDetailedCandidate = async (candidate: Candidate | null) => {
     });
 
     const data = await response.json();
-    console.log("Detailed Candidate Data:", data); // ✅ Debugging
+    console.log("Detailed Candidate Data:", data); // Debugging
 
     setCandidate({
       ...candidate,
@@ -53,16 +53,14 @@ const fetchDetailedCandidate = async (candidate: Candidate | null) => {
     setCandidate(candidate); // Fallback to original data
   }
 };
+
 const handleAcceptCandidate = () => {
   if (candidate) {
-    setSavedCandidtates((prevSavedCandidates) => {
-      if (!prevSavedCandidates.some((saved) => saved.id === candidate.id)) {
-        const updatedSaved = [...prevSavedCandidates, candidate];
-        localStorage.setItem('savedCandidates', JSON.stringify(updatedSaved));
-        return updatedSaved;        
-      }
-      return prevSavedCandidates;
-    });
+    const savedCandidatesFromStorage = JSON.parse(localStorage.getItem('savedCandidates') || '[]');
+    if (!savedCandidatesFromStorage.some((saved: Candidate) => saved.id === candidate.id)) {
+        const updatedSaved = [...savedCandidatesFromStorage, candidate];
+        localStorage.setItem('savedCandidates', JSON.stringify(updatedSaved));                 
+      }     
   
     fetchNextCandidate();
   }
@@ -73,29 +71,39 @@ const handleRejectCandidate = () => {
 };
 
 return (
-  <div>
+  <>
     <h1>Candidate Search</h1>
     {candidate ? (
-      <div>
+      <div className="candidate-card">
+        <div className="candidate-avatar">
         <img src={candidate.avatar_url} alt={candidate.name} width="100" />
-          <h2>{candidate.name || candidate.login}</h2>
-          <p>Username: {candidate.login}</p>
-          <p>Location: {candidate.location || 'Unknown'}</p>
-          <p>Email: {candidate.email || 'Not available'}</p>
-          <p>Company: {candidate.company || 'Not available'}</p>
-          <a href={candidate.html_url} target="_blank" rel="noopener noreferrer">
-            GitHub Profile
+      </div>
+
+      <div className="candidate-info">
+        <h2>{candidate.name? candidate.name : candidate.login}</h2>
+        <p>Username: {candidate.login}</p>
+        <p>Location: {candidate.location || 'Unknown'}</p>
+        <p>Email: {candidate.email || 'Not available'}</p>
+        <p>Company: {candidate.company || 'Not available'}</p>
+        <p>Bio: {candidate.bio || 'Not available'}</p>
+        <a href={candidate.html_url} target="_blank" rel="noopener noreferrer">
+          GitHub Profile
           </a>
-          <br />
-          <button onClick={handleAcceptCandidate} className="accept-button">+</button>
-          <button onClick={handleRejectCandidate} className="reject-button">-</button>
+        </div>                  
+      
+        <div className="button-group">   
+          <button className="accept-button" onClick={handleAcceptCandidate}>+</button>
+          <button className="reject-button" onClick={handleRejectCandidate}>-</button>
         </div>
+      </div>        
       ) : (
         <p>No more candidates available.</p>
       )}
-    </div>
+    </>
   );
 };
+  
+
 
 
 export default CandidateSearch;

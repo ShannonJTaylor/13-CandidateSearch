@@ -17,7 +17,7 @@ const Nav = () => {
           to="/SavedCandidates" 
           className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} 
           >
-            Saved Candidates
+            Potential Candidates
           </NavLink>
         </li>
       </ul>
