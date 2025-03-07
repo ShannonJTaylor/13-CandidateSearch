@@ -2,11 +2,11 @@
 export interface Candidate {
   id: number;
   name: string;
-  email?: string;
-  phone: string;
-  skills: string[];
-  experience: number;
-  education: string;
-  avatar_url: string;
+  login: string;    //User's full name
   location?: string;
+  email?: string;
+  company?: string;
+  bio?: string;
+  avatar_url: string; //Avatar image URL
+  html_url: string;  //GitHub profile link
 }
